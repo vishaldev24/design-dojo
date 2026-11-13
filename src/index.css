@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --dojo-green: #0b3d2e;
+  --dojo-green-hover: #0e4e3b;
+  --dojo-green-soft: #e6eee9;
+  --dojo-cream: #f4f1ea;
+  --dojo-card: #fcfbf8;
+  --dojo-surface: #ece7dc;
+  --dojo-amber: #f59e0b;
+  --dojo-amber-soft: #fef3c7;
+  --dojo-ink: #13221c;
+  --dojo-muted: #52615a;
+  --dojo-border: rgba(11, 61, 46, 0.13);
+}
+
+@layer base {
+  html {
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--dojo-cream);
+    color: var(--dojo-ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .font-mono-num {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Checkbox draw animation */
+@keyframes checkDraw {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes checkPop {
+  0% {
+    transform: scale(0.86);
+  }
+  55% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.dojo-check-path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 0;
+  animation: checkDraw 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dojo-check-box-checked {
+  animation: checkPop 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dojo-check-path,
+  .dojo-check-box-checked {
+    animation: none !important;
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print stylesheet: hide navigation, use white background */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  html,
+  body,
+  #root {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  aside,
+  nav,
+  .no-print,
+  [data-no-print="true"] {
+    display: none !important;
+  }
+
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .print-break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
